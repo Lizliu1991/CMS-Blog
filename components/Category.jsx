@@ -4,6 +4,7 @@ import { getCategories } from '../services'
 
 const Category = () => {
 
+//pages里面用getserversideprops之类的function， component里面还是继续用useEffect
   const [categories, setCategories] = useState([])
   useEffect(() => {
      getCategories()

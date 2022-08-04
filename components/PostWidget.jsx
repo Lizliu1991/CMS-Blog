@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getRecentPosts, getSimilarPosts } from '../services'
 
 const PostWidget = ({ categories, slug}) => {
-  console.log(categories,slug)
+
 const[relatedPosts, setRelatedPosts] = useState([])
 useEffect(() => {
   //if there is a slug, meaning reading a specific article, then get similar posts
