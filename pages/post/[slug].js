@@ -3,7 +3,7 @@ import { getPosts,  getPostDetails } from '../../services'
 import { PostDetail, PostWidget, Author, Comments, CommentsForm, Category } from '../../components'
 
 const PostDetails = ({ post }) => {
-    console.log(post.content)
+   
    
     return (
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { submitComment } from '../services'
 
 
 const CommentsForm = ({ slug }) => {
@@ -10,6 +11,12 @@ const CommentsForm = ({ slug }) => {
   const emailEL = useRef();
   const storeDataEL = useRef();
 
+  //get data from local storage
+  useEffect(()=> {
+    nameEL.current.value = window.localStorage.getItem('name'),
+    emailEL.current.value = window.localStorage.getItem('email')
+  },[])
+
   const handleCommentSubmission = () => {
     //error handling
     setError(false);
@@ -17,29 +24,34 @@ const CommentsForm = ({ slug }) => {
     const { value: name } = nameEL.current;
     const { value: email } = emailEL.current;
     const { checked: storeData } = storeDataEL.current;
+
     if (!comment || !name || !email) {
       setError(true)
       return;
     }
-    const commentObj = {
-      name, email, comment, slug
-    }
+    const commentObj = { name, email, comment, slug }
 
     if(storeData){
-      localStorage.setItem('name', name);
-      localStorage.setItem('email', email);
+      window.localStorage.setItem('name', name);
+      window.localStorage.setItem('email', email);
     } else {
-      localStorage.removeItem('name', name);
-      localStorage.removeItem('email', email);
+      window.localStorage.removeItem('name', name);
+      window.localStorage.removeItem('email', email);
     }
-
+    submitComment(commentObj)
+    .then((res) => {
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false)
+      }, 3000)
+    })
   }
 
 
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 pb-12 mb-8'>
-      <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Comment Form</h3>
+      <h3 className='text-xl mb-8 font-semibold border-b pb-4'>Leave a reply</h3>
       <div className='grid grid-cols-1 gap-4 mb-4'>
         <textarea ref={commentEL}
           className="p-4 outline-none w-full rounded-lg focus:ring-gray-200 bg-gray-100 text-gray-700"

@@ -131,3 +131,13 @@ export const getPostDetails = async (slug) => {
   const result = await request(graphqlAPI, query, { slug })
   return result.post
 }
+
+//make a request to nextjs backend. GRAPH CMS allows user's own backend to interact with  their service to actually submit a comment. And then we can  see it ,approve or disapprove it in our graph cms dashboard
+export const submitComment = async(obj) => {
+const result = await fetch('/api/comments', {
+  method:'POST',
+  body: JSON.stringify(obj)
+})
+return result.json();
+}
+
