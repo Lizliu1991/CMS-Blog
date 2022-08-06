@@ -4,7 +4,7 @@ import { submitComment } from '../services'
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false)
-  const [localStorage, setLocalStorage] = useState(null)
+  const [localStorage, setLocalStorage] = useState("")
   const [showSuccess, setShowSuccess] = useState(false)
   const commentEL = useRef();
   const nameEL = useRef();
@@ -93,7 +93,7 @@ const CommentsForm = ({ slug }) => {
         >
           Post Comment
         </button>
-        {showSuccess && <span className='text-xl float-right font-semibold mt-3 tetx-green-500'></span>}
+        {showSuccess && <span className='text-xl float-right font-semibold mt-3 tetx-green-500'>Comment submitted for review</span>}
       </div>
     </div>
   )
